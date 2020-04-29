@@ -2,6 +2,14 @@
 
 >> Feito para tentar fazer o diff do Git usando um algorítmo simples como o LCS
 
+<p align=center>
+    <img src="https://img.shields.io/badge/-Python-black?style=flat&logo=python">
+    <img src="https://img.shields.io/badge/-Javascript-black?style=flat&logo=javascript">
+    <br>
+    <img src="https://img.shields.io/badge/Eel-v0.12.3-blue">
+    <img src="https://img.shields.io/badge/PyInstaller-4.0.dev-yellow">
+</p>
+
 ![demo](.github/primeira.png)
 
 ## Tecnologias usadas
@@ -19,3 +27,7 @@ $ pip install -r requirements.txt
 ```
 
 Só então rode o [server.py](./server.py), lembrando que defini como padrão o Chrome como navegador, qualquer coisa modifique o arquivo [server.py](./server.py), caso estiver usando Edge ou Firefox.
+
+De outra forma, entre na pasta dist, e rode o executável [server.exe](./dist/server.exe).
+
+![add](.github/segunda.png)

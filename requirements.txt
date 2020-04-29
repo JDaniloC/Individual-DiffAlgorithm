@@ -7,3 +7,4 @@ gevent-websocket==0.10.1
 greenlet==0.4.15
 whichcraft==0.6.1
 PyInstaller==4.0.dev0+9dd34bdfba
+altgraph==0.17
