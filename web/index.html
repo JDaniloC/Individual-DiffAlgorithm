@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+      <head>
+            <title> LCS for Diff Algorithm </title>
+            <link rel="stylesheet" href="styles.css">
+            <script type="text/javascript" src="/eel.js"></script>
+            <script type="text/javascript" src="script.js"></script>
+            <link href="https://fonts.googleapis.com/css2?family=Slabo+27px&display=swap" rel="stylesheet">
+      </head>
+      <body>
+            <h1> Diferença entre os arquivos </h1>
+            <div class="seletor">
+                  <input type="file" id="primeiro" accept='text/plain' onchange='openFile(event)'>
+                  →
+                  <input type="file" id="segundo" accept='text/plain' onchange='openFile(event)'>
+            </div>
+            <button class="computar" onclick="exibir()"> Computar </button>
+            <span class="main">
+                  <div class="linhas"></div>
+                  <div class="esquerda">
+
+                  </div>
+                  <div class="linhas"></div>
+                  <div class="direita">
+
+                  </div>
+            </span>
+            <h2> Explicação </h2>
+            <p id="explicacao">
+                  O algorítmo realiza o Longest Common Sequence comparando os dois arquivos (linha por linha), 
+                  no qual vai devolver o tamanho da sequência mais longa. Mas como a solução é obtida usando 
+                  programação dinâmica através de uma matriz, então é possível ir voltando na matriz para se obter
+                  esse termo mais longo.
+            </p>
+            <br>
+            <p id="explicacao">
+                  Com essa informação, é comparado com o arquivo original, no qual não haverá cores caso a linha
+                  estiver intácta. Caso tiver alguma linha que não está no arquivo original, seja antes ou depois, 
+                  então será considerado como adição(+), caso alguma linha não aparecer no arquivo modificado então
+                  será considerado como remoção(-). E por fim, toda linha intácta que tiver sido movida devido alguma
+                  adição(+) ou remoção(-), será considerada como modificação, sendo assim colorida de azul.
+            </p>
+            <br>
+            <p id="explicacao">
+                  O backend do frontend foi feito com HTML/CSS/JS puro, já o backend foi feito em Python, sendo 
+                  conectado usando <a href="https://github.com/samuelhwilliams/Eel" target="_blank">Eel</a> já que o
+                  algorítmo de LCS foi feito em Python. Dessa forma, os arquivos são capturados via javascript, e ao
+                  pressionar o botão de computar, então ele irá enviar o texto de ambos os arquivos para o script 
+                  python, que por sua vez devolve um novo texto com os sinais (+, -, M) para o Javascript, que por
+                  fim envia para o HTML renderizar.
+            </p>
+      </body>
+</html>

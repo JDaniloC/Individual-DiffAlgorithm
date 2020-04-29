@@ -1,0 +1,53 @@
+body {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-family: 'Slabo 27px', serif;
+}
+
+.main {
+    display: flex;
+}
+
+.linhas {
+    padding-top: 40px;
+    text-align: end;
+}
+
+.esquerda {
+    border: groove 1px #fff;
+    text-align: start;
+    flex: 1;
+    margin: 40px 10px;
+    min-height: 100px;
+    background-color: white;
+}
+
+.direita {
+    border: groove 1px #fff;
+    text-align: start;
+    flex: 1;
+    margin: 40px 10px;
+    min-height: 100px;
+    background-color: white;
+
+}
+
+#primeiro {
+    float: left;
+    width: 180px;
+    margin-left: 10%;
+}  
+
+#segundo {
+    float: right;
+    width: 180px;
+    margin-right: 10%;
+}
+
+#explicacao {
+    text-indent: 2%;
+    line-height: 1.6;
+    text-align: justify;
+    margin: 0 20%;
+}
