@@ -33,11 +33,11 @@ def interpretador(matriz, palavra, outra):
 
         if i != 0 and numero == matriz[i - 1][j]:
             if verificador: prefixo = ""
-            resultado.append(" - " + outra[i - 1])
+            resultado.append(" + " + outra[i - 1])
             i -= 1
         elif j != 0 and numero == matriz[i][j - 1]: 
             if verificador: prefixo = ""
-            resultado.append(" + " + palavra[j - 1])
+            resultado.append(" - " + palavra[j - 1])
             j -= 1
         else:
             resultado.append(prefixo + palavra[j - 1])
@@ -54,8 +54,3 @@ def compararArquivos(primeiro, segundo):
     resultado = interpretador(matriz, primeiro, segundo)
 
     return resultado
-
-if __name__ == "__main__":
-    result = compararArquivos("arc1.txt", "arc2.txt")
-    for i in result:
-        print(i.strip())

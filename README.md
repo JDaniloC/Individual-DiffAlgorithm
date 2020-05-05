@@ -31,3 +31,7 @@ Só então rode o [server.py](./server.py), lembrando que defini como padrão o 
 De outra forma, entre na pasta dist, e rode o executável [server.exe](./dist/server.exe).
 
 ![add](.github/segunda.png)
+
+Fontes importantes:
+  - [Youtube - How to Create File Diff Tool Using Longest Common Sub-Sequece Algorithm? | E1 - AM; YourMove](https://www.youtube.com/watch?v=KuHaX3_Fn8g)
+  - [Blog - The Patience Diff Algorithm - Jcoglan.com by James Coglan](https://blog.jcoglan.com/2017/09/19/the-patience-diff-algorithm/)
