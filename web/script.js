@@ -40,8 +40,6 @@ function feedLines() {
 window.exibir = async function exibirDiferencas() {
     if (primeiro && segundo) {
         const result = await eel.comparar(primeiro, segundo)()
-        //var div = document.querySelector(".direita")
-        //div.innerHTML = result.join("<br>")
         formatar(result)
     } else { alert("Selecione os arquivos!") }
 }
@@ -56,13 +54,16 @@ function formatar(lista) {
     lista.forEach(linha => {
         var p = document.createElement("p")
         p.style.margin = 0
-        if (linha[1] === "+") {
-            p.style.backgroundColor = "#e6ffed"
-        } else if (linha[1] === "-") {
-            p.style.backgroundColor = "#ffeef0"
-        } else if (linha[1] === 'M') {
-            p.style.backgroundColor = "#f1f8ff"
-            linha = linha.slice(3, linha.length)
+        switch(linha[1]) {
+            case "+":
+                p.style.backgroundColor = "#e6ffed"
+                break
+            case "-":
+                p.style.backgroundColor = "#ffeef0"
+                break
+            case "M":
+                p.style.backgroundColor = "#f1f8ff"
+                linha = linha.slice(3, linha.length)
         }
         p.innerHTML = linha
         div.appendChild(p)

@@ -1,6 +1,11 @@
-from functions import compararArquivos
-
 def longestIncreasingSubsequence(lista):
+    '''
+        Percorre as pilhas do patience sorting
+    e pega o LIS da mesma
+
+    lista - Lista de stacks
+    reuturn: Lista = [int, int, ...]
+    '''
     j = len(lista) - 1
     resultado = [lista[j][-1][0]]
     valor = lista[j][-1][1]
@@ -15,6 +20,12 @@ def longestIncreasingSubsequence(lista):
     return resultado
 
 def patienceSorting(lista):
+    '''
+        Devolve as pilhas resultantes de um patience sorting
+    lista - Lista de números
+
+    return: lista = [[(int, int), (...)], [...]]
+    '''
     pilhas = [[(lista[0], lista[0])]]
     for i in range(1, len(lista)):
         ver, atual = False, lista[i]
@@ -27,64 +38,39 @@ def patienceSorting(lista):
             pilhas.append([(atual, pilhas[-1][-1][0])])
     return pilhas
 
-def removeDuplicadas(lista):
-    # lista = [x for x in primeiro if lista.count(x) == 1]
-    lista = lista[:]
-    indices = [x for x in range(len(lista))]
-
-    i = 0
-    while i < len(lista):
-        if lista[i] in lista[i + 1:]:
-            j = i + 1
-            while j < len(lista):
-                if lista[j] == lista[i]:
-                    lista.pop(j)
-                    indices.pop(j)
-                    j -= 1
-                j += 1
-            lista.pop(i)
-            indices.pop(i)
-            i -= 1
-        i += 1
-    return lista, indices
-
 def devolveUnicos(primeiro, segundo):
-    primeiro, indicesA = removeDuplicadas(primeiro)
-    segundo, indicesB = removeDuplicadas(segundo)
+    '''
+        Devolve todas as frases que estão em ambos os textos
+    de forma que aparecem apenas uma vez em cada.
 
-    if len(primeiro) > 0 and len(segundo) > 0:
-        
-        # Verifica se os elementos de A estão em B e reorganiza os índices
-        i = 0
-        while i < len(primeiro):
-            j = i
-            verificador = False
-            while j < len(segundo):
-                if primeiro[i] == segundo[j]:
-                    verificador = True
-                    segundo[i], segundo[j] = segundo[j], segundo[i]
-                    indicesB[i], indicesB[j] = indicesB[j], indicesB[i]
-                    break
-                j += 1
-            if not verificador:
-                primeiro.pop(i)
-                i -= 1
-            i += 1
-        
-        if i < len(segundo) - 1:
-            segundo = segundo[:i]
-            indicesB = indicesB[:i]
-        
-        if len(primeiro) > 1:
-            return indicesA, indicesB 
-    return None
+    primeiro - Lista de strings
+    segundo - Lista de strings
+
+    return: lista = [[indicesA], [indicesB]]
+    '''
+    unicos = {}
+
+    for i in range(len(primeiro)):
+        if primeiro[i] in unicos:
+            unicos[primeiro[i]][0] += 1
+        else:
+            unicos[primeiro[i]] = [1, 0, i, None]
+    
+    for i in range(len(segundo)):
+        if segundo[i] in unicos:
+            unicos[segundo[i]][1] += 1
+            unicos[segundo[i]][3] = i
+    
+    unicos = list(zip(*[x[2:] for x in unicos.values() if x[:2] == [1, 1]]))
+
+    return unicos
 
 def devolveIndices(indicesA, indicesB):
-    # LIS de B
-    lista = longestIncreasingSubsequence(patienceSorting(indicesB))
-
+    # Longest Increasing Subsequence em B
     # Valores relativos de B em A
+    lista = longestIncreasingSubsequence(patienceSorting(indicesB))
     lista = [indicesA[indicesB.index(x)] for x in lista]
+
     # Pega a maior sequência
     sequencia = []
     for i in lista:
@@ -104,12 +90,12 @@ def devolveIndices(indicesA, indicesB):
 
     return list(resultado) + [indicesB[indicesA.index(x)] for x in resultado]
 
-def dividir(primeiro, segundo):
+def diffAlgorithm(funcao, primeiro, segundo):
     if primeiro == [] or segundo == []:
         return primeiro + segundo
     unicos = devolveUnicos(primeiro, segundo)
 
-    if unicos != None:
+    if unicos != []:
         indA, indB = unicos
         if len(indA) == 1:
             inicioA, inicioB = indA[0], indB[0]
@@ -117,12 +103,15 @@ def dividir(primeiro, segundo):
         else:
             inicioA, finalA, inicioB, finalB = devolveIndices(indA, indB)
 
-        anterior = dividir(primeiro[:inicioA], segundo[:inicioB])
-        proximo = dividir(primeiro[finalA+1:], segundo[finalB+1:])
+        anterior = diffAlgorithm(funcao, primeiro[:inicioA], segundo[:inicioB])
+        proximo = diffAlgorithm(funcao, primeiro[finalA+1:], segundo[finalB+1:])
 
         return anterior + [primeiro[x] for x in range(inicioA, finalA + 1)] + proximo
     else:
-        return compararArquivos(primeiro, segundo)
+        return funcao(primeiro, segundo)
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #  
+
 '''
 primeiro = [
     "David Axelrod",
@@ -142,14 +131,14 @@ segundo = [
     "The Sonics",
     "The Sonics"
 ]
-'''
+
 primeiro = "this is incorrect and so is this".split()
 segundo = "this is good and correct and so is this".split()
 
 resultado = dividir(primeiro, segundo)
 for i in resultado:
     print(i if i[1] != "M" else i[3:])
-'''
+
 lista = [9, 4, 6, 12, 8, 7, 1, 5, 10, 11, 3, 2, 13]
 resultado = patienceSorting(lista)
 
