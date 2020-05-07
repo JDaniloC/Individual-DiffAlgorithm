@@ -84,16 +84,19 @@ def exibir(evt):
     else: alert("Selecione os arquivos!")
 
 def colocaBr(lista, outra):
-    i, j = 0, 0
+    i, j, cont = 0, 0, 0
     while i < len(lista):
         if lista[i] == "<hr>":
             while j < len(outra) and outra[j] != "<hr>":
-                if outra[j] != "<br>" and outra[j] != lista[j]: 
+                if outra[j] != "<br>" and cont <= 0: 
                     lista.insert(i, "<br>")
                     i +=1
                 j += 1
+                cont -= 1
             j += 1
+            cont = -1
         i += 1
+        cont += 1
     
     resultado = []
     for i in lista:
