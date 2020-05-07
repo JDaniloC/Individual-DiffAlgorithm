@@ -4,8 +4,10 @@ from browser import document, bind, alert, window, aio
 # os scripts deveriam estar na pasta do brython
 import sys
 sys.path.insert(1, '../scripts/')
-from patience import diffAlgorithm
+from patience import PatienceDiff
 from functions import compararArquivos
+
+diff = PatienceDiff(compararArquivos)
 
 numLinhas = 0
 first = False
@@ -62,7 +64,7 @@ def criaComClasse(tag, classe):
 def exibir(evt):
     global numLinhas, first, second
     if first and second:
-        resultado = diffAlgorithm(compararArquivos, first, second)
+        resultado = diff.diffAlgorithm(first, second)
         if numLinhas < len(resultado):
             numLinhas = len(resultado)
             aumentaLinhas()
@@ -75,11 +77,40 @@ def exibir(evt):
             elif linha[1] == "-":
                 p.style.backgroundColor = "#ffeef0"
             elif linha[1] == "M":
-                p.style.backgroundColor = "#f1f8ff"
                 linha = linha[3:]
             p.innerHTML = linha
             direita.appendChild(p)
+        mostrarDivisoes()
     else: alert("Selecione os arquivos!")
+
+def colocaBr(lista, outra):
+    i, j = 0, 0
+    while i < len(lista):
+        if lista[i] == "<hr>":
+            while j < len(outra) and outra[j] != "<hr>":
+                if outra[j] != "<br>" and outra[j] != lista[j]: 
+                    lista.insert(i, "<br>")
+                    i +=1
+                j += 1
+            j += 1
+        i += 1
+    
+    resultado = []
+    for i in lista:
+        resultado.append(i)
+        if i != "<hr>" and i != "<br>":
+            resultado.append("<br>")
+    return resultado
+
+def mostrarDivisoes():
+    global first, second
+    divs = diff.divisoes
+    resultado = diff.junta(first, second, divs)
+    primeiro = colocaBr(resultado[0], resultado[1])
+    segundo = colocaBr(resultado[1], resultado[0])
+    
+    divEsquerdo.innerHTML = "".join(primeiro)
+    divDireito.innerHTML = "".join(segundo)
 
 colocarTag("H1", texto = "Patience Sorting")
 
@@ -102,3 +133,9 @@ span.appendChild(linha1)
 span.appendChild(esquerda)
 span.appendChild(linha2)
 span.appendChild(direita)
+
+divisoes = colocarTag("div", classe="main")
+divEsquerdo = criaComClasse("div", "esquerda")
+divDireito = criaComClasse("div", "direita")
+divisoes.appendChild(divEsquerdo)
+divisoes.appendChild(divDireito)
