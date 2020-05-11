@@ -1,5 +1,5 @@
 import eel
-from web.scripts.functions import compararArquivos
+from web.brython.scripts.functions import compararArquivos
 
 @eel.expose
 def comparar(primeiro, segundo):

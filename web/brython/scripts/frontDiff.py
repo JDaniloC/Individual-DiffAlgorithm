@@ -2,10 +2,10 @@ from browser import document, bind, alert, window, aio
 # Ao ser requisitado pelo brython, o diretório padrão
 # se torna o brython, então é preciso anexar.
 # os scripts deveriam estar na pasta do brython
-import sys
-sys.path.insert(1, '../scripts/')
-from patience import PatienceDiff
-from functions import compararArquivos
+#import sys
+#sys.path.insert(1, '../scripts/')
+from scripts.patience import PatienceDiff
+from scripts.functions import compararArquivos
 
 diff = PatienceDiff(compararArquivos)
 
@@ -137,8 +137,13 @@ span.appendChild(esquerda)
 span.appendChild(linha2)
 span.appendChild(direita)
 
+colocarTag("h2", texto = "Divisões")
+
 divisoes = colocarTag("div", classe="main")
 divEsquerdo = criaComClasse("div", "esquerda")
 divDireito = criaComClasse("div", "direita")
 divisoes.appendChild(divEsquerdo)
 divisoes.appendChild(divDireito)
+
+voltar = colocarTag("a", texto = "Voltar")
+voltar.href = "../index.html"

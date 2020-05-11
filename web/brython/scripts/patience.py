@@ -1,8 +1,47 @@
+# lista = [9, 4, 6, 12, 8, 7, 1, 5, 10, 11, 3, 2, 13]
+
 class PatienceDiff:
     def __init__(self, funcao):
         self.divisoes = []
         self.stacks = []
         self.funcao = funcao
+
+    def sortMerge(self, lista):
+        valores = self.patienceSorting(lista)
+        stacks = self.stacks
+        resultado = [stacks[-1][-1]]
+        proximo = valores[resultado[-1]]
+
+        for i in range(len(stacks) - 2, -1, -1):
+            lista = stacks[i]
+            indice = lista.index(proximo)
+            resultado += lista[indice:]
+            for i in range(indice):
+                j = len(resultado) - 1
+                while resultado[j] < lista[i]:
+                    j -= 1
+                resultado.insert(j + 1, lista[i])
+            proximo = valores[resultado[-1]]
+        resultado.reverse()
+        return resultado
+    
+    def sortMin(self, lista):
+        valores = self.patienceSorting(lista)
+        stacks = self.stacks
+        resultado = []
+        while stacks != []:
+            menor = stacks[0][-1]
+            j = 0
+            for i in range(1, len(stacks)):
+                if menor > stacks[i][-1]:
+                    menor = stacks[i][-1]
+                    j = i
+            resultado.append(menor)
+            if len(stacks[j]) == 1:
+                stacks.pop(j)
+            else:
+                stacks[j].pop(-1)
+        return resultado
 
     def longestIncreasingSubsequence(self, ponteiros):
         '''
@@ -132,27 +171,4 @@ class PatienceDiff:
         meioA = ["<hr>"] + primeiro[inicio[0]:final[0]] + ["<hr>"]
         meioB = ["<hr>"] + segundo[inicio[1]:final[1]] + ["<hr>"]
         return cima[0] + meioA + baixo[0], cima[1] + meioB + baixo[1], divs
-
-# lista = [9, 4, 6, 12, 8, 7, 1, 5, 10, 11, 3, 2, 13]
-
-'''
-primeiro = [
-    "David Axelrod",
-    "Electric Prunes",
-    "Gil Scott Heron",
-    "The Slits",
-    "Faust",
-    "The Sonics",
-    "The Sonics"
-]
-segundo = [
-    "The Slits",
-    "Gil Scott Heron",
-    "David Axelrod",
-    "Electric Prunes",
-    "Faust",
-    "The Sonics",
-    "The Sonics"
-]
-
-'''
+        
