@@ -1,5 +1,3 @@
-# lista = [9, 4, 6, 12, 8, 7, 1, 5, 10, 11, 3, 2, 13]
-
 class PatienceDiff:
     def __init__(self, funcao):
         self.divisoes = []
@@ -9,7 +7,7 @@ class PatienceDiff:
     def sortMerge(self, lista):
         valores = self.patienceSorting(lista)
         stacks = self.stacks
-        resultado = [stacks[-1][-1]]
+        resultado = stacks[-1][:]
         proximo = valores[resultado[-1]]
 
         for i in range(len(stacks) - 2, -1, -1):
@@ -129,8 +127,9 @@ class PatienceDiff:
                     break
             if not verificador:
                 sequencia.append([i])
-        resultado = max(sequencia, key = lambda x: x[1] - x[0] if len(x) == 2 else 0)
-
+        resultado = max(sequencia, key = lambda x: x[1] - x[0] if len(x) == 2 else -float("inf"))
+        if len(resultado) == 1:
+            resultado += resultado
         return list(resultado) + [indicesB[indicesA.index(x)] for x in resultado]
 
     def diffAlgorithm(self, primeiro, segundo):

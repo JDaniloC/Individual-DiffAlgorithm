@@ -1,9 +1,4 @@
 from browser import document, bind, alert, window, aio
-# Ao ser requisitado pelo brython, o diretório padrão
-# se torna o brython, então é preciso anexar.
-# os scripts deveriam estar na pasta do brython
-#import sys
-#sys.path.insert(1, '../scripts/')
 from scripts.patience import PatienceDiff
 from scripts.functions import compararArquivos
 
@@ -115,35 +110,35 @@ def mostrarDivisoes():
     divEsquerdo.innerHTML = "".join(primeiro)
     divDireito.innerHTML = "".join(segundo)
 
-colocarTag("H1", texto = "Patience Sorting")
+if __name__ == "__main__":
+    colocarTag("H1", texto = "Patience Sorting")
 
-seletor = colocarTag("div", classe = "seletor")
-seletor.appendChild(criaInput("primeiro", abrirArquivo))
-seletor.appendChild(document.createTextNode("→"))
-seletor.appendChild(criaInput("segundo", abrirArquivo))
+    seletor = colocarTag("div", classe = "seletor")
+    seletor.appendChild(criaInput("primeiro", abrirArquivo))
+    seletor.appendChild(document.createTextNode("→"))
+    seletor.appendChild(criaInput("segundo", abrirArquivo))
 
-computar = colocarTag("button", classe="computar")
-computar.text = "Computar"
-computar.onclick = exibir
+    computar = colocarTag("button", texto = "Computar", classe="computar")
+    computar.onclick = exibir
 
-linha1 = criaComClasse("div", "linhas")
-linha2 = criaComClasse("div", "linhas")
-esquerda = criaComClasse("div", "esquerda")
-direita = criaComClasse("div", "direita")
+    linha1 = criaComClasse("div", "linhas")
+    linha2 = criaComClasse("div", "linhas")
+    esquerda = criaComClasse("div", "esquerda")
+    direita = criaComClasse("div", "direita")
 
-span = colocarTag("span", classe="main")
-span.appendChild(linha1)
-span.appendChild(esquerda)
-span.appendChild(linha2)
-span.appendChild(direita)
+    span = colocarTag("span", classe="main")
+    span.appendChild(linha1)
+    span.appendChild(esquerda)
+    span.appendChild(linha2)
+    span.appendChild(direita)
 
-colocarTag("h2", texto = "Divisões")
+    colocarTag("h2", texto = "Divisões")
 
-divisoes = colocarTag("div", classe="main")
-divEsquerdo = criaComClasse("div", "esquerda")
-divDireito = criaComClasse("div", "direita")
-divisoes.appendChild(divEsquerdo)
-divisoes.appendChild(divDireito)
+    divisoes = colocarTag("div", classe="main")
+    divEsquerdo = criaComClasse("div", "esquerda")
+    divDireito = criaComClasse("div", "direita")
+    divisoes.appendChild(divEsquerdo)
+    divisoes.appendChild(divDireito)
 
-voltar = colocarTag("a", texto = "Voltar")
-voltar.href = "../index.html"
+    voltar = colocarTag("a", texto = "Voltar")
+    voltar.href = "../index.html"
