@@ -30,8 +30,6 @@ $ pip install -r requirements.txt
 
 Só então rode o [server.py](./server.py), lembrando que defini como padrão o Chrome como navegador, qualquer coisa modifique o arquivo [server.py](./server.py), caso estiver usando Edge ou Firefox.
 
-De outra forma, entre na pasta dist, e rode o executável [server.exe](./dist/server.exe).
-
 ## Usando Eel
 
 A explicação de como foi usar o Eel e como o algorítmo funciona está no index.html
