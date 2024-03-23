@@ -6,6 +6,6 @@ gevent==23.9.1
 gevent-websocket==0.10.1
 greenlet==0.4.15
 whichcraft==0.6.1
-PyInstaller==4.0.dev0+9dd34bdfba
+PyInstaller==5.13.1
 altgraph==0.17
 brython==3.8.8
